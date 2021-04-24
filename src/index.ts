@@ -2,7 +2,7 @@ import http from "http";
 
 const port = process.env.PORT || "8080";
 const destination = process.env.DESTINATION || `https://www.grouparoo.com`;
-const HTTP_CODE = parseInt(process.env.DESTINATION || "302");
+const http_code = parseInt(process.env.HTTP_CODE || "302");
 
 const html = `
 <body>
@@ -10,27 +10,28 @@ const html = `
 </body>
 `;
 
-const server = http.createServer(function (req, res) {
-  res.writeHead(HTTP_CODE, {
+function handle(req: http.IncomingMessage, res: http.ServerResponse) {
+  res.writeHead(http_code, {
     "content-type": "text/html",
     Location: destination,
   });
   res.end(html);
   log(req);
-});
+}
 
 function log(req: http.IncomingMessage) {
-  const message = `${timeStamp()} - [${req.method}] ${
-    req.connection.remoteAddress
-  } ${req.url}`;
-
+  const timestamp = new Date().toISOString();
+  const message = `${timestamp} - [${req.method}] ${parseIp(req)} ${req.url}`;
   console.log(message);
 }
 
-function timeStamp() {
-  const now = new Date();
-  return now.toISOString();
+function parseIp(req: http.IncomingMessage) {
+  return (
+    ((req.headers["x-forwarded-for"] as string) || "")?.split(",").shift() ||
+    req.socket?.remoteAddress
+  );
 }
 
+const server = http.createServer(handle);
 server.listen(port);
 console.log(`*** Redirector up and running ***`);
