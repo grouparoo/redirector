@@ -21,7 +21,7 @@
     "lint": "prettier --check src",
     "watch": "tsc --watch",
     "start": "node ./dist/index.js",
-    "heroku-prebuild": "npm install --only=dev"
+    "heroku-prebuild": "npm install"
   },
   "devDependencies": {
     "@types/node": "*",
