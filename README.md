@@ -26,3 +26,13 @@ $ curl -v localhost:8080
   <h1>You are being redirected to https://www.grouparoo.com</h1>
 </body>
 ```
+
+## Configuration
+
+Environment Variables:
+
+```
+const port = process.env.PORT || "8080";
+const destination = process.env.DESTINATION || `https://www.grouparoo.com`;
+const http_code = parseInt(process.env.HTTP_CODE || "302");
+```
