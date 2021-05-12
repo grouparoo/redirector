@@ -22,7 +22,7 @@
     "watch": "tsc --watch",
     "start": "node ./dist/index.js"
   },
-  "devDependencies": {
+  "dependencies": {
     "@types/node": "*",
     "typescript": "4.2.4"
   }
