@@ -1,5 +1,7 @@
 # Redirector
 
+[![test](https://github.com/grouparoo/redirector/actions/workflows/test.yml/badge.svg)](https://github.com/grouparoo/redirector/actions/workflows/test.yml)
+
 A little node app that tells all HTTP requests to go somewhere else
 
 ```
