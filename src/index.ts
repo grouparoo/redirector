@@ -32,6 +32,20 @@ function parseIp(req: http.IncomingMessage) {
   );
 }
 
+function exit() {
+  console.log("*** Bye! ***");
+  process.exit(0);
+}
+
+process.on("SIGINT", () => exit());
+process.on("SIGTERM", () => exit());
+process.on("SIGHUP", () => exit());
+process.on("SIGUSR2", () => exit());
+
 const server = http.createServer(handle);
 server.listen(port);
+
 console.log(`*** Redirector up and running ***`);
+console.log({ port, destination, http_code });
+console.log("***");
+console.log("");
